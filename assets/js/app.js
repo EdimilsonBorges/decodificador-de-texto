@@ -10,7 +10,17 @@ btnCriptografar.addEventListener("click", () => {
     if (texto === "") {
         mostrarMensagemVazio();
     } else {
-        mostrarMensagemResultado();
+        mostrarMensagemCriptografado();
+    }
+});
+
+btnDescriptografar.addEventListener("click", () => {
+    const texto = principalTextarea.value;
+
+    if (texto === "") {
+        mostrarMensagemVazio();
+    } else {
+        mostrarMensagemDescriptografado();
     }
 });
 
@@ -40,7 +50,7 @@ function criptografarTexto(texto) {
                 criptografia.push(letra);
                 break;
         }
-        
+
         return criptografia;
     });
 
@@ -48,6 +58,17 @@ function criptografarTexto(texto) {
 
 }
 
+function descriptografar(texto) {
+
+    const textoDescriptografado = texto
+        .replace(/enter/g, "e")
+        .replace(/imes/g, "i")
+        .replace(/ai/g, "a")
+        .replace(/ober/g, "o")
+        .replace(/ufat/g, "u");
+
+    return textoDescriptografado;
+}
 function mostrarMensagemVazio() {
     const resultadoText = document.getElementById("resultado__textarea");
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
@@ -61,7 +82,7 @@ function mostrarMensagemVazio() {
     }
 }
 
-function mostrarMensagemResultado() {
+function mostrarMensagemCriptografado() {
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
     const resultadoText = document.getElementById("resultado__textarea");
     const texto = principalTextarea.value;
@@ -74,6 +95,23 @@ function mostrarMensagemResultado() {
     } else {
         resultadoText.textContent = criptografarTexto(texto);
     }
+    principalTextarea.value = "";
+}
+
+function mostrarMensagemDescriptografado() {
+    const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
+    const resultadoText = document.getElementById("resultado__textarea");
+    const texto = principalTextarea.value;
+    if (resultadoEmpty) {
+        sectionResultado.removeChild(resultadoEmpty);
+    }
+    if (!resultadoText) {
+        sectionResultado.appendChild(criarMensagemResultado(descriptografar(texto)));
+        sectionResultado.appendChild(criarButtonCopiar());
+    } else {
+        resultadoText.textContent = descriptografar(texto);
+    }
+    principalTextarea.value = "";
 }
 
 function criarButtonCopiar() {
