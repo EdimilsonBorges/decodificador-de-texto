@@ -40,8 +40,8 @@ main>a {
     width: 50%;
 }
 
-textarea {
-    height: calc(100vh - 48px - 100px);
+#principal__textarea {
+    height: calc(100vh - 48px - 28px - 100px);
     background-color: #F3F5FC;
     border: none;
     outline: none;
@@ -50,14 +50,16 @@ textarea {
     resize: none;
     font-family: "Inter", sans-serif;
     font-weight: 400;
+    
 
 }
 
-textarea::placeholder {
+#principal__textarea::placeholder {
     color: #0A3871;
 }
 
 .principal__aviso {
+    margin-top: 14px;
     display: flex;
     gap: 5px;
     align-items: center;
@@ -92,7 +94,6 @@ textarea::placeholder {
     font-weight: 400;
     font-size: 16px;
     box-shadow: 1px 1px 5px #0A3871;
-    text-shadow: 3px 3px 5px #000000;
     cursor: pointer;
 }
 
@@ -104,7 +105,7 @@ textarea::placeholder {
     box-shadow: none
 }
 
-#btn__descriptografar {
+#btn__descriptografar, #btn__copiar {
     width: 328px;
     background-color: #D8DFE8;
     padding: 24px;
@@ -115,19 +116,18 @@ textarea::placeholder {
     font-weight: 400;
     font-size: 16px;
     box-shadow: 1px 1px 5px #0A3871;
-    text-shadow: 1px 1px 5px #ffffff;
     cursor: pointer;
 }
 
-#btn__descriptografar:hover {
+#btn__descriptografar:hover, #btn__copiar:hover {
     box-shadow: inset 10px 10px 20px #F3F5FC, 1px 1px 5px #0A3871;
 }
 
-#btn__descriptografar:active {
+#btn__descriptografar:active, #btn__copiar:active {
     box-shadow: none
 }
 
-.resultado {
+.resultado{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -141,8 +141,31 @@ textarea::placeholder {
     border-radius: 32px;
 }
 
+#resultado__mensagem__empty{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+}
+
 .resultado>img {
     width: 100%;
+}
+
+#resultado__textarea{
+    height: 100vh;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 24px;
+    color: #495057;
+    background-color: #FFFFFF;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    text-align: start;
 }
 
 footer {
