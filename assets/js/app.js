@@ -5,13 +5,48 @@ const sectionResultado = document.getElementById("resultado");
 sectionResultado.appendChild(criarMensagemNaoEncontrado());
 
 btnCriptografar.addEventListener("click", () => {
+    const texto = principalTextarea.value;
 
-    if (principalTextarea.value === "") {
+    if (texto === "") {
         mostrarMensagemVazio();
     } else {
         mostrarMensagemResultado();
     }
 });
+
+function criptografarTexto(texto) {
+    const arrayLetras = [...texto];
+    const textoCriptografado = arrayLetras.map((letra) => {
+        const criptografia = [];
+
+        switch (letra) {
+            case "e":
+                criptografia.push("enter");
+                break;
+            case "i":
+                criptografia.push("imes");
+                break;
+            case "a":
+                criptografia.push("ai");
+                break;
+            case "o":
+                criptografia.push("ober");
+                break;
+            case "u":
+                criptografia.push("ufat");
+                break;
+
+            default:
+                criptografia.push(letra);
+                break;
+        }
+        
+        return criptografia;
+    });
+
+    return textoCriptografado.join("");
+
+}
 
 function mostrarMensagemVazio() {
     const resultadoText = document.getElementById("resultado__textarea");
@@ -29,14 +64,15 @@ function mostrarMensagemVazio() {
 function mostrarMensagemResultado() {
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
     const resultadoText = document.getElementById("resultado__textarea");
+    const texto = principalTextarea.value;
     if (resultadoEmpty) {
         sectionResultado.removeChild(resultadoEmpty);
     }
     if (!resultadoText) {
-        sectionResultado.appendChild(criarMensagemResultado(principalTextarea.value));
+        sectionResultado.appendChild(criarMensagemResultado(criptografarTexto(texto)));
         sectionResultado.appendChild(criarButtonCopiar());
     } else {
-        resultadoText.textContent = principalTextarea.value;
+        resultadoText.textContent = criptografarTexto(texto);
     }
 }
 
@@ -49,11 +85,11 @@ function criarButtonCopiar() {
     return btnCopiar;
 }
 
-function criarMensagemResultado(texto) {
+function criarMensagemResultado(textoCriptografado) {
     const resultadoText = document.createElement("textarea");
     resultadoText.setAttribute("id", "resultado__textarea");
     resultadoText.disabled = true;
-    resultadoText.textContent = texto;
+    resultadoText.textContent = textoCriptografado;
 
     return resultadoText;
 }
