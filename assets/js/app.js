@@ -25,37 +25,14 @@ btnDescriptografar.addEventListener("click", () => {
 });
 
 function criptografarTexto(texto) {
-    const arrayLetras = [...texto];
-    const textoCriptografado = arrayLetras.map((letra) => {
-        const criptografia = [];
 
-        switch (letra) {
-            case "e":
-                criptografia.push("enter");
-                break;
-            case "i":
-                criptografia.push("imes");
-                break;
-            case "a":
-                criptografia.push("ai");
-                break;
-            case "o":
-                criptografia.push("ober");
-                break;
-            case "u":
-                criptografia.push("ufat");
-                break;
-
-            default:
-                criptografia.push(letra);
-                break;
-        }
-
-        return criptografia;
-    });
-
-    return textoCriptografado.join("");
-
+    const textoCriptografado = texto
+        .replace(/e/g, "enter")
+        .replace(/i/g, "imes")
+        .replace(/a/g, "ai")
+        .replace(/o/g, "ober")
+        .replace(/u/g, "ufat");
+    return textoCriptografado;
 }
 
 function descriptografar(texto) {
@@ -66,9 +43,18 @@ function descriptografar(texto) {
         .replace(/ai/g, "a")
         .replace(/ober/g, "o")
         .replace(/ufat/g, "u");
-
     return textoDescriptografado;
 }
+
+function copiarParaAreaDeTranferencia() {
+    const texto = document.getElementById("resultado__textarea").value;
+    navigator.clipboard.writeText(texto).then(function () {
+        console.log('Texto copiado para a área de transferência');
+    }).catch(function (erro) {
+        console.error('Erro ao copiar para a área de transferência', erro);
+    });
+}
+
 function mostrarMensagemVazio() {
     const resultadoText = document.getElementById("resultado__textarea");
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
@@ -86,14 +72,15 @@ function mostrarMensagemCriptografado() {
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
     const resultadoText = document.getElementById("resultado__textarea");
     const texto = principalTextarea.value;
+    const textoCriptografado = criptografarTexto(texto);
     if (resultadoEmpty) {
         sectionResultado.removeChild(resultadoEmpty);
     }
     if (!resultadoText) {
-        sectionResultado.appendChild(criarMensagemResultado(criptografarTexto(texto)));
+        sectionResultado.appendChild(criarMensagemResultado(textoCriptografado));
         sectionResultado.appendChild(criarButtonCopiar());
     } else {
-        resultadoText.textContent = criptografarTexto(texto);
+        resultadoText.textContent = textoCriptografado;
     }
     principalTextarea.value = "";
 }
@@ -102,14 +89,15 @@ function mostrarMensagemDescriptografado() {
     const resultadoEmpty = document.getElementById("resultado__mensagem__empty");
     const resultadoText = document.getElementById("resultado__textarea");
     const texto = principalTextarea.value;
+    const textoDescriptografado = descriptografar(texto);
     if (resultadoEmpty) {
         sectionResultado.removeChild(resultadoEmpty);
     }
     if (!resultadoText) {
-        sectionResultado.appendChild(criarMensagemResultado(descriptografar(texto)));
+        sectionResultado.appendChild(criarMensagemResultado(textoDescriptografado));
         sectionResultado.appendChild(criarButtonCopiar());
     } else {
-        resultadoText.textContent = descriptografar(texto);
+        resultadoText.textContent = textoDescriptografado;
     }
     principalTextarea.value = "";
 }
@@ -119,6 +107,9 @@ function criarButtonCopiar() {
     btnCopiar.setAttribute("type", "button");
     btnCopiar.setAttribute("id", "btn__copiar");
     btnCopiar.innerText = "Copiar";
+    btnCopiar.addEventListener("click", () => {
+        copiarParaAreaDeTranferencia();
+    });
 
     return btnCopiar;
 }
