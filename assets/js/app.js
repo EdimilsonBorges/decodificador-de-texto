@@ -48,10 +48,15 @@ function descriptografar(texto) {
 
 function copiarParaAreaDeTranferencia() {
     const texto = document.getElementById("resultado__textarea").value;
+    const mensagem = document.getElementById("mensagem_area_de_tranferencia");
     navigator.clipboard.writeText(texto).then(function () {
-        console.log('Texto copiado para a área de transferência');
+        mensagem.innerText = "Copiado para a área de transferência.";
+        mensagem.style.opacity = 1;
+        setTimeout(()=>{ mensagem.style.opacity = 0}, 1000);
     }).catch(function (erro) {
-        console.error('Erro ao copiar para a área de transferência', erro);
+        mensagem.innerText = "Erro ao copiar para a área de transferência.";
+        mensagem.style.opacity = 1;
+        setTimeout(()=>{ mensagem.style.opacity = 0}, 1000);
     });
 }
 
