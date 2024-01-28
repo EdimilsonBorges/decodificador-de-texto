@@ -18,7 +18,7 @@
     --text-secondary-color: #000000;
 }
 
-.theme_switch{
+.theme_switch {
     position: absolute;
     right: 2.5rem;
     display: flex;
@@ -27,8 +27,8 @@
     gap: 0.62rem;
 }
 
-#darck-name{
-cursor: pointer;
+#darck-name {
+    cursor: pointer;
 }
 
 #switch {
@@ -273,10 +273,17 @@ footer>p>a {
 }
 
 @media screen and (max-width: 800px) {
-    header{
-        justify-content: start;
-        font-size: 0.6rem;
+    .theme_switch {
+        position: absolute;
+        right: 0.5rem;
     }
+
+    header {
+        justify-content: start;
+        font-size: 0.78rem;
+        padding: 1.5rem 0.5rem;
+    }
+
     main {
         flex-direction: column;
     }
