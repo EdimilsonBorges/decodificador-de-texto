@@ -2,7 +2,55 @@ const principalTextarea = document.getElementById("principal__textarea");
 const btnCriptografar = document.getElementById("btn__criptografar");
 const btnDescriptografar = document.getElementById("btn__descriptografar");
 const sectionResultado = document.getElementById("resultado");
+const themeSwitch = document.getElementById("switch");
+let themeDarck = false;
 sectionResultado.appendChild(criarMensagemNaoEncontrado());
+
+
+
+themeSwitch.addEventListener("change",(event)=>{
+    if(themeDarck){
+        liteTheme();
+    }else{
+        darkTheme();
+    }
+});
+
+function darkTheme() {
+    themeDarck = true;
+    const img = document.querySelector("#resultado__mensagem__empty > img");
+    if(img){
+        img.setAttribute("src", "./assets/img/empty-dark.svg");
+    }
+
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty('--primary-color', '#20200F');
+    rootStyle.setProperty('--text-primary-color',' #FFFFFF');
+    rootStyle.setProperty('--secondary-color', '#939F93');
+    rootStyle.setProperty('--tertiary-color', '#4F4C4C');
+    rootStyle.setProperty('--button-secondary-color', '#C2CFC2');
+    rootStyle.setProperty('--button-primary-hover-color', '#9F9393');
+    rootStyle.setProperty('--text-resultado-color', '#fff');
+    rootStyle.setProperty('--text-secondary-color', '#fff');
+}
+
+function liteTheme(){
+    themeDarck = false;
+    const img = document.querySelector("#resultado__mensagem__empty > img");
+    if(img){
+        img.setAttribute("src", "./assets/img/empty-lite.svg");
+    }
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty('--primary-color', '#0A3871');
+    rootStyle.setProperty('--text-primary-color',' #FFFFFF');
+    rootStyle.setProperty('--secondary-color', '#F3F5FC');
+    rootStyle.setProperty('--tertiary-color', '#FFFFFF');
+    rootStyle.setProperty('--button-secondary-color', '#D8DFE8');
+    rootStyle.setProperty('--button-primary-hover-color', '#2a578b');
+    rootStyle.setProperty('--text-resultado-color', '#495057');
+    rootStyle.setProperty('--text-secondary-color', '#000000');
+}
+
 
 btnCriptografar.addEventListener("click", () => {
     const texto = principalTextarea.value;
@@ -52,11 +100,11 @@ function copiarParaAreaDeTranferencia() {
     navigator.clipboard.writeText(texto).then(function () {
         mensagem.innerText = "Copiado para a área de transferência.";
         mensagem.style.opacity = 1;
-        setTimeout(()=>{ mensagem.style.opacity = 0}, 1000);
+        setTimeout(() => { mensagem.style.opacity = 0 }, 1000);
     }).catch(function (erro) {
         mensagem.innerText = "Erro ao copiar para a área de transferência.";
         mensagem.style.opacity = 1;
-        setTimeout(()=>{ mensagem.style.opacity = 0}, 1000);
+        setTimeout(() => { mensagem.style.opacity = 0 }, 1000);
     });
 }
 
@@ -133,7 +181,11 @@ function criarMensagemNaoEncontrado() {
     resultadoEmpty.setAttribute("id", "resultado__mensagem__empty");
 
     const img = document.createElement("img");
-    img.setAttribute("src", "./assets/img/empty.svg");
+    if(themeDarck){
+        img.setAttribute("src", "./assets/img/empty-dark.svg");
+    }else{
+        img.setAttribute("src", "./assets/img/empty-lite.svg");
+    }
     img.setAttribute("alt", "Imagem de não encontrado");
 
     const h2 = document.createElement("h2");
