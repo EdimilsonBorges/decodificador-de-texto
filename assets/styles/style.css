@@ -27,6 +27,10 @@
     gap: 0.62rem;
 }
 
+#darck-name{
+cursor: pointer;
+}
+
 #switch {
     width: 0;
     height: 0;
@@ -34,12 +38,10 @@
 }
 
 #label-switch {
-    position: absolute;
-    right: 0rem;
     display: block;
     width: 3.43rem;
     height: 1.75rem;
-    background-color: #477a85;
+    background-color: var(--secondary-color);
     border-radius: 6.25rem;
     position: relative;
     cursor: pointer;
@@ -51,7 +53,7 @@
     content: "";
     width: 1.37rem;
     height: 1.37rem;
-    background-color: #e8f5f7;
+    background-color: var(--primary-color);
     position: absolute;
     border-radius: 4.37rem;
     top: 0.18rem;
@@ -65,11 +67,11 @@ input:checked+#label-switch:after {
 }
 
 input:checked+#label-switch {
-    background-color: #243d42;
+    background-color: var(--secondary-color);
 }
 
 #label-switch:active:after {
-    width: 3.12rem;
+    width: 2rem;
 }
 
 body {
@@ -83,6 +85,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1.5rem 2.5rem;
     background-color: var(--primary-color);
     height: 3.4rem;
     color: var(--text-primary-color);
@@ -270,6 +273,10 @@ footer>p>a {
 }
 
 @media screen and (max-width: 800px) {
+    header{
+        justify-content: start;
+        font-size: 0.6rem;
+    }
     main {
         flex-direction: column;
     }
