@@ -111,11 +111,11 @@ function criarMensagemNaoEncontrado() {
     if(themeDarck){
         themeSwitch.checked = true;
         darkTheme();
-        img.setAttribute("src", "./assets/img/empty-dark.svg");
+        img.setAttribute("src", "./src/assets/img/empty-dark.svg");
     }else{
         themeSwitch.checked = false;
         liteTheme();
-        img.setAttribute("src", "./assets/img/empty-lite.svg");
+        img.setAttribute("src", "./src/assets/img/empty-lite.svg");
     }
     img.setAttribute("alt", "Imagem de não encontrado");
 
@@ -173,7 +173,7 @@ function darkTheme() {
     themeDarck = true;
     const img = document.querySelector("#resultado__mensagem__empty > img");
     if(img){
-        img.setAttribute("src", "./assets/img/empty-dark.svg");
+        img.setAttribute("src", "./src/assets/img/empty-dark.svg");
     }
 
     const rootStyle = document.documentElement.style;
@@ -192,7 +192,7 @@ function liteTheme(){
     themeDarck = false;
     const img = document.querySelector("#resultado__mensagem__empty > img");
     if(img){
-        img.setAttribute("src", "./assets/img/empty-lite.svg");
+        img.setAttribute("src", "./src/assets/img/empty-lite.svg");
     }
     const rootStyle = document.documentElement.style;
     rootStyle.setProperty('--primary-color', '#0A3871');
